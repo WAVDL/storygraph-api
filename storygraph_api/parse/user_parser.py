@@ -15,7 +15,6 @@ class UserParser:
             a_list = book.find_all('a')
             authors = []
             for a in a_list:
-                print(f"a link: {a['href']}")
                 if a['href'].startswith("/books/"):
                     title = a.text.strip()
                     book_id = a['href'].split('/')[-1]

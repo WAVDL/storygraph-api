@@ -12,11 +12,19 @@ class UserParser:
         books_list = []
         books = soup.find_all('div', class_="book-title-author-and-series")
         for book in books:
-            title = book.find('a').text.strip()
-            book_id = book.find('a')['href'].split('/')[-1]
+            a_list = book.find_all('a')
+            authors = []
+            for a in a_list:
+                print(f"a link: {a['href']}")
+                if a['href'].startswith("/books/"):
+                    title = a.text.strip()
+                    book_id = a['href'].split('/')[-1]
+                if a['href'].startswith("/authors/"):
+                    authors.append(a.text.strip())
             books_list.append({
                 'title': title,
-                'book_id': book_id
+                'book_id': book_id,
+                'author': authors
                 })
         data = list({(book['title'], book['book_id']): book for book in books_list}.values())
         return data

@@ -23,7 +23,7 @@ class UserParser:
             books_list.append({
                 'title': title,
                 'book_id': book_id,
-                'author': authors
+                'authors': authors
                 })
         data = list({(book['title'], book['book_id']): book for book in books_list}.values())
         return data
